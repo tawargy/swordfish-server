@@ -1,17 +1,16 @@
 
 import express,{Express} from 'express';
-//import dotenv from 'dotenv'
-import crawler from './crawler/crawler'
+import asyncHandler from 'express-async-handler';
+import {updateMovies,updateShows} from './handlers/updateDB';
 
 const app:Express  =express()
 
-//const dirPath= process.env.PATH
-//if(!dirPath){
-//  console.log('no')
-//}else{
-//console.log(dirPath)
-////crawler(dirPath).then(data=>console.log(data))
-//}
+app.get('/healthz',(req,res)=>{
+  res.status(200).send('everything is ok');
+})
 
+// update movies,shows DB
+app.get('/updateMovies',asyncHandler(updateMovies))
+app.get('/updateShows',asyncHandler(updateShows))
 
 export default app;
