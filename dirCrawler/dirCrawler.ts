@@ -1,9 +1,8 @@
 import * as fs from 'fs/promises'
-import * as path from 'path'
 import { extname} from 'path'
 
 
-export const crawlerMoies =async (path:string,name?:string|null):Promise<Object[]> => {
+export const dirCrawlerMoies =async (path:string,name?:string|null):Promise<Object[]> => {
   let arr:Object[] = []
 
   const items =await fs.readdir(path, {withFileTypes: true}) 
@@ -15,7 +14,7 @@ export const crawlerMoies =async (path:string,name?:string|null):Promise<Object[
         arr.push({directory_name:name,path:itemPath})
       }
     } else {
-      const sub=await crawlerMoies(itemPath,item.name);
+      const sub=await dirCrawlerMoies(itemPath,item.name);
       arr.push(...sub)
     
      }
@@ -23,6 +22,6 @@ export const crawlerMoies =async (path:string,name?:string|null):Promise<Object[
 
   return arr
 }
-export const crawlerShows=async(path:string)=>{
+export const dirCrawlerShows=async(path:string)=>{
   return path
 }
