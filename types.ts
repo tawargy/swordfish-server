@@ -10,5 +10,5 @@ export interface Movie{
   plot:string;
   imdbRating:string;
   imdbID:string;
-  path:string;
+  dirPath:string;
 }
