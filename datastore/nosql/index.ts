@@ -13,21 +13,22 @@ export class NoSqlDataStore implements Datastore {
   }
 
   async creatMovie(movie: MovieType): Promise<void> {
-    await Movie.create(movie)
+    await Movie.create(movie);
   }
   async getAllMovies(): Promise<MovieType[]> {
-    throw 'ok';
+    const data = await Movie.find();
+    return data;
   }
-  async getMovieById(id: string): Promise<MovieType | undefined> {
-    throw 'ok';
+  async getMovieById(id: string): Promise<MovieType | null> {
+    return await Movie.findById(id);
   }
-  async getMovieByTitle(title: string): Promise<MovieType | undefined> {
-    throw 'ok';
+  async getMovieByTitle(title: string): Promise<MovieType | null> {
+    return await Movie.findOne({ title: title });
   }
   async updateMovie(movie: MovieType): Promise<void> {
     throw 'error';
   }
   async deleteMovie(id: string): Promise<void> {
-    throw 'error';
+    await Movie.findByIdAndDelete(id);
   }
 }
